@@ -1,0 +1,12 @@
+.btn {
+    background-color: #9f63d4;
+    border-color: aliceblue;
+    color: white;
+    width: 150px;
+}
+
+.btn:hover {
+    background-color: #ba89e4;
+    border-color: aliceblue;
+    color: white;
+}
