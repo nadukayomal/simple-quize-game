@@ -45,13 +45,74 @@
                     </div>
                 </div>
             </div>
-            <div class="col-6 mx-auto">
+            <div class="d-flex justify-content-center">
                 <button type="submit" class="btn btn-lg">Register </button>
-                <!-- log in button should be change it's attributes later -->
-                <button type="submit" class="btn btn-lg">log in </button>
             </div>
+            <P>already have an account ? <a href="login.php">login</a> </P>
         </div>
     </form>
-    <!-- tomorrow do the php part relevant this page  -->
+
+    <?php
+        $first_name = $last_name = $user_email = $user_password = null;
+        $errors = array();
+
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $first_name = validationLetters($_POST['f_name']);
+            $last_name  = validationLetters($_POST['l_name']);
+            $user_email = validationEmail($_POST['user_name']);
+            $user_password = validationPassword($_POST['create_passwd'], $_POST['conf_passwd']);
+
+            if ($first_name != null && $last_name != null && $user_email != null && $user_password != null) {
+                $Server = "localhost";
+                $username = "root";
+                $password = "";
+                $dbname = "quize_game";
+
+                $con = new mysqli($Server, $username, $password, $dbname) or die("unable to connect database");
+                $sql = "INSERT INTO user_info VALUES($first_name, $last_name, $user_email, $user_password)";  
+
+                if ($con -> query($sql) === TRUE) {
+                    echo "<h1> Registered successfully </h1>";
+                }else {
+                    echo "<h1> already registered </h1>";
+                }
+        
+            }else {
+                if ($first_name == null) {
+                    array_push($errors, "Invalid first name");
+                }
+                if ($last_name == null) {
+                    array_push($errors, "Invalid last name");
+                }
+                if ($user_email == null) {
+                    array_push($errors, "Invalid email");
+                }
+                if ($user_password == null) {
+                    array_push($errors, "Password mismatch");
+                }
+                foreach ($errors as $error) {
+                    echo "<p class=text-center text-danger>.$error.</p>";
+                }
+            }
+        }
+
+        function validationLetters($data){
+            if(ctype_alpha($data)){
+                return $data;
+            }
+        }
+
+        function validationEmail($data){
+            if(filter_var($data, FILTER_VALIDATE_EMAIL)){
+                return $data;
+            }
+        }
+
+        function validationPassword($data_1,$data_2){
+            if($data_1 == $data_2){
+                return $data_1;
+            }
+        }
+    ?>
 </body>
 </html>
