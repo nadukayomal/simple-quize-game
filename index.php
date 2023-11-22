@@ -69,14 +69,15 @@
                 $dbname = "quize_game";
 
                 $con = new mysqli($Server, $username, $password, $dbname) or die("unable to connect database");
-                $sql = "INSERT INTO user_info VALUES($first_name, $last_name, $user_email, $user_password)";  
-
+                $sql = "INSERT INTO user_info (first_name, last_name, user_email, user_password) VALUES ('$first_name', '$last_name', '$user_email', '$user_password')";
+  
                 if ($con -> query($sql) === TRUE) {
                     echo "<h1> Registered successfully </h1>";
                 }else {
                     echo "<h1> already registered </h1>";
                 }
-        
+                
+                $con->close();
             }else {
                 if ($first_name == null) {
                     array_push($errors, "Invalid first name");
