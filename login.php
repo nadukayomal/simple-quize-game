@@ -25,9 +25,45 @@
                 </div>
                 <div class="d-flex justify-content-center">
                     <!-- insert external css form index.css page  -->
-                    <button type="button" class="btn btn-lg login-btn">log in</button>
+                    <button type="submit" class="btn btn-lg login-btn">log in</button>
                 </div>
             </div>
         </form>
+
+        <?php
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                $user_name = $_POST["user_name"];
+                $user_password = $_POST["user_password"];
+
+                if ($user_name != null && $user_password != null) {
+                    $Server = "localhost";
+                    $username = "root";
+                    $password = "";
+                    $dbname = "quize_game";
+
+                    $con = new mysqli($Server, $username, $password, $dbname);
+
+                    if ($con->connect_error) {
+                        die("Connection failed :". $con->connect_error);
+                    }
+
+                    $sql = "SELECT * FROM user_info WHERE user_email = '$user_name' AND user_password = '$user_password'";
+                    $result = $con->query($sql);
+
+                    if ($result->num_rows > 0) {
+                        // valid credential direct to another page 
+                        echo "Valid username and password";
+                        exit();
+                    } else {
+                        echo "Invalid username or password";
+                    }
+
+                    $con -> close();
+                } else {
+                    echo "Please enter username and password";
+                }
+
+            }
+        ?>
     </body>
 </html>
