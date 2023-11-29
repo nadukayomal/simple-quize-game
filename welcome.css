@@ -1,0 +1,66 @@
+* {
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: aliceblue;
+}
+
+a:hover {
+    color: black;
+}
+
+.topic {
+    color: green;
+    font-size: 1.8em;
+    font-weight: bold;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+}
+
+.sub-maths {
+    background-color: aqua;
+    transition: transform 450ms;
+    -webkit-transition: transform 450ms;
+    -moz-transition: transform 450ms;
+    -ms-transition: transform 450ms;
+    -o-transition: transform 450ms;
+}
+
+.sub-physics {
+    background-color: orange;
+    transition: transform 450ms;
+    -webkit-transition: transform 450ms;
+    -moz-transition: transform 450ms;
+    -ms-transition: transform 450ms;
+    -o-transition: transform 450ms;
+}
+
+.sub-ict {
+    background-color: blue;
+    transition: transform 450ms;
+    -webkit-transition: transform 450ms;
+    -moz-transition: transform 450ms;
+    -ms-transition: transform 450ms;
+    -o-transition: transform 450ms
+}
+
+.sub-science {
+    background-color: red;
+    transition: transform 450ms;
+    -webkit-transition: transform 450ms;
+    -moz-transition: transform 450ms;
+    -ms-transition: transform 450ms;
+    -o-transition: transform 450ms
+}
+
+/* this code applies a hover effect to all components within the subject */
+.p-5:hover {
+    opacity:0.5;
+    transform: scale(1.08);
+    -webkit-transform: scale(1.08);
+    -moz-transform: scale(1.08);
+    -ms-transform: scale(1.08);
+    -o-transform: scale(1.08);
+}
