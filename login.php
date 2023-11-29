@@ -51,9 +51,16 @@
                     $result = $con->query($sql);
 
                     if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()){
+                            $fname = $row["first_name"];
+                            $lname = $row["last_name"];
+                            $uid = $row["id"];
+                        }
                         // valid credential direct to another page 
                         echo "Valid username and password";
-                        exit();
+                        $_SESSION["userName"] = $fname . " " . $lname;
+                        $_SESSION["uid"] = $uid;
+                        header("Location:");
                     } else {
                         echo "Invalid username or password";
                     }
